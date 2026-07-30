@@ -87,7 +87,7 @@ export default function Login() {
   };
 
   return (
-    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-6">
+    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-3 sm:p-6 min-h-screen py-8">
       {/* Background Blobs */}
       <div className="glow-blob bg-blue-600 w-[600px] h-[600px] -top-20 -left-20 opacity-20"></div>
       <div className="glow-blob bg-cyan-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
@@ -95,7 +95,7 @@ export default function Login() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-7xl min-h-[700px] glass-panel rounded-[48px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative z-10"
+        className="w-full max-w-7xl min-h-0 lg:min-h-[700px] glass-panel rounded-3xl lg:rounded-[48px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative z-10"
       >
         {/* Logo Section */}
         <motion.div
@@ -113,24 +113,26 @@ export default function Login() {
             />
             <div className="mt-8 text-center">
               <h1 className="text-5xl font-bold text-white mb-2 tracking-tight font-elmessiri">EDUCORE</h1>
-              <p className="text-blue-200/40 font-medium text-2xl font-elmessiri">MODERN ONLINE LEARNING PLATFORM</p>
+              <p className="text-sm font-semibold text-blue-400 tracking-widest uppercase">
+                Online Learning Platform
+              </p>
             </div>
           </div>
         </motion.div>
 
-        {/* Form Section */}
+        {/* Login Form Section */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="flex items-center justify-center p-12 lg:p-20 bg-white/[0.02]"
+          className="flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white/[0.02]"
         >
           <div className="w-full max-w-md">
-            <div className="mb-12">
-              <h1 className="text-6xl font-bold text-white mb-4 tracking-tighter neon-text">
+            <div className="mb-8 sm:mb-12">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4 tracking-tighter neon-text">
                 Login <span className="text-blue-400">Portal</span>
               </h1>
-              <p className="text-blue-200/40 text-lg">Welcome Back</p>
+              <p className="text-blue-200/40 text-sm sm:text-lg">Welcome Back</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">

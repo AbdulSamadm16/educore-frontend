@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import greenLogo from '../../assets/green-logo.png';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
   BookOpen, Video, Award, Users, 
-  ShieldCheck, ArrowRight, Zap, Globe 
+  ShieldCheck, ArrowRight, Zap, Globe, Menu, X 
 } from 'lucide-react';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -55,10 +56,10 @@ export default function LandingPage() {
       
       {/* Navigation Bar */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 glass-panel rounded-2xl">
-        <div className="px-6 h-20 flex items-center justify-between">
+        <div className="px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            <img src={greenLogo} alt="EduCore" className="w-16 h-16 object-contain" />
-            <span className="text-xl font-black tracking-widest text-white">EDUCORE</span>
+            <img src={greenLogo} alt="EduCore" className="w-12 h-12 sm:w-16 sm:h-16 object-contain" />
+            <span className="text-lg sm:text-xl font-black tracking-widest text-white">EDUCORE</span>
           </div>
           
           <div className="hidden md:flex items-center gap-8 text-sm font-bold tracking-widest uppercase text-white/60">
@@ -77,16 +78,64 @@ export default function LandingPage() {
               Catalog
             </button>
           </div>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white/80 hover:text-white rounded-xl bg-white/5"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-white/10 px-6 py-4 flex flex-col gap-4 bg-[#0b0f1a]/95 rounded-b-2xl"
+            >
+              <a 
+                href="#features" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-bold tracking-widest uppercase text-white/70 hover:text-white py-1"
+              >
+                Features
+              </a>
+              <a 
+                href="#benefits" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-bold tracking-widest uppercase text-white/70 hover:text-white py-1"
+              >
+                Benefits
+              </a>
+              <div className="flex flex-col gap-3 pt-2 border-t border-white/5">
+                <button 
+                  onClick={() => { setIsMobileMenuOpen(false); navigate('/login'); }}
+                  className="w-full text-center py-2.5 rounded-xl bg-white/5 text-white font-bold tracking-widest uppercase text-sm"
+                >
+                  Sign In
+                </button>
+                <button 
+                  onClick={() => { setIsMobileMenuOpen(false); navigate('/learner-dashboard/catalogue'); }}
+                  className="w-full text-center py-2.5 rounded-xl bg-blue-600 text-white font-bold tracking-widest uppercase text-sm"
+                >
+                  Catalog
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 px-6 overflow-hidden min-h-screen flex items-center">
+      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 overflow-hidden min-h-screen flex items-center">
         {/* Background Gradients */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
+        <div className="max-w-7xl mx-auto w-full relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 text-center md:text-left">
           
           {/* Left Side - Logo & Tag */}
           <div className="w-full md:w-1/2 flex justify-center md:justify-start md:ml-12">
@@ -97,14 +146,14 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, type: 'spring' }}
                 className="flex justify-center"
               >
-                <img src={greenLogo} alt="EduCore" className="w-64 h-64 md:w-[450px] md:h-[450px] object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.3)]" />
+                <img src={greenLogo} alt="EduCore" className="w-48 h-48 sm:w-64 sm:h-64 md:w-[450px] md:h-[450px] object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.3)]" />
               </motion.div>
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, type: 'spring', delay: 0.1 }}
-                className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm md:text-base font-bold uppercase tracking-widest mt-4"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs sm:text-sm md:text-base font-bold uppercase tracking-widest mt-4"
               >
                 <Zap size={18} /> Holistic E-Learning Platform
               </motion.div>
@@ -118,7 +167,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-8 leading-tight"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 sm:mb-8 leading-tight"
             >
               Master Your Craft with <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-400 to-blue-400 animate-gradient-x">

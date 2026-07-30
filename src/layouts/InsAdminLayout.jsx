@@ -5,7 +5,7 @@ import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
 import { 
   LogOut, LayoutDashboard, Users, BookOpen, 
   CreditCard, FileBarChart, Terminal, Settings, 
-  Bell, ClipboardList, DollarSign, ShieldAlert,
+  Bell, ClipboardList, DollarSign, ShieldAlert, Menu, X,
   Info, CheckCircle, AlertTriangle, AlertCircle, Play, GraduationCap, CheckCheck,
   Layers, Award, HelpCircle
 } from 'lucide-react';
@@ -18,6 +18,11 @@ export default function InsAdminLayout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -292,18 +297,81 @@ export default function InsAdminLayout() {
   const activeTab = navItems.find(item => item.path === location.pathname)?.name || 'Dashboard';
 
   return (
-    <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 lg:p-8 font-inter overflow-hidden">
+    <div className="min-h-screen bg-[#020617] flex items-center justify-center p-0 md:p-4 lg:p-8 font-inter overflow-hidden">
       {/* Background Glows */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full" />
         <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-emerald-500/5 blur-[120px] rounded-full" />
       </div>
 
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 lg:hidden"
+            />
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-72 glass-panel border-r border-white/10 flex flex-col z-50 lg:hidden bg-slate-900"
+            >
+              <div className="p-5 flex items-center justify-between border-b border-white/5">
+                <Link to="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+                  <img src={greenLogo} alt="EduCore" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-bold font-elmessiri text-white">EDUCORE</span>
+                </Link>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-white/60 hover:text-white rounded-xl bg-white/5"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all ${
+                      activeTab === item.name 
+                      ? 'bg-emerald-500 text-white font-bold' 
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <item.icon size={20} className={activeTab === item.name ? 'text-white' : ''} />
+                    <span className="text-xs font-bold uppercase tracking-wide">{item.name}</span>
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="p-4 border-t border-white/5 mt-auto">
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 bg-red-500/10 border border-red-500/20"
+                >
+                  <LogOut size={18} />
+                  <span className="text-xs font-black uppercase tracking-widest">Logout</span>
+                </button>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Main Glass Container */}
-      <div className="w-full h-[90vh] glass-panel border border-white/5 rounded-[40px] flex overflow-hidden relative shadow-2xl">
+      <div className="w-full h-screen md:h-[90vh] glass-panel border border-white/5 rounded-none md:rounded-[40px] flex overflow-hidden relative shadow-2xl">
         
-        {/* Sidebar */}
-        <aside className="w-72 border-r border-white/5 flex flex-col h-full bg-black/20">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex w-72 border-r border-white/5 flex-col h-full bg-black/20">
           {/* Logo Section */}
           <div className="p-8 pb-12 flex items-center gap-4">
             <div className="w-14 h-14 bg-emerald-500/20 rounded-xl flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
@@ -348,17 +416,24 @@ export default function InsAdminLayout() {
         {/* Content Area */}
         <div className="flex-1 flex flex-col min-w-0 bg-black/10">
           {/* Header */}
-          <header className="h-24 px-10 flex items-center justify-between border-b border-white/5">
-            <div>
-              {(() => {
-                if (location.pathname === '/ins-admin') {
-                  return (
-                    <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">Welcome back, Admin 👋</h1>
-                      <p className="text-xs text-white/30 font-medium uppercase tracking-widest">Here's what's happening on your platform today.</p>
-                    </>
-                  );
-                } else if (location.pathname === '/ins-admin/users') {
+          <header className="h-16 md:h-20 px-4 md:px-10 flex items-center justify-between border-b border-white/5 gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <button 
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="lg:hidden p-2 text-white/80 hover:text-white glass-panel rounded-xl flex items-center justify-center shrink-0"
+              >
+                <Menu size={22} />
+              </button>
+              <div className="min-w-0 flex-1">
+                {(() => {
+                  if (location.pathname === '/ins-admin') {
+                    return (
+                      <>
+                        <h1 className="text-base sm:text-xl md:text-2xl font-black text-white tracking-tight truncate">Welcome back, Admin 👋</h1>
+                        <p className="text-[10px] sm:text-xs text-white/30 font-medium uppercase tracking-widest hidden sm:block truncate">Here's what's happening on your platform today.</p>
+                      </>
+                    );
+                  } else if (location.pathname === '/ins-admin/users') {
                   return (
                     <>
                       <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
@@ -473,8 +548,9 @@ export default function InsAdminLayout() {
                 }
               })()}
             </div>
+          </div>
 
-            <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 shrink-0">
             <div className="relative" ref={notificationRef}>
               <button 
                 onClick={() => {
@@ -484,7 +560,7 @@ export default function InsAdminLayout() {
                     fetchNotifications();
                   }
                 }}
-                className={`relative p-3 rounded-2xl border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+                className={`relative p-2.5 sm:p-3 rounded-2xl border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
                   showNotifications ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/5' : 'text-white/40 hover:text-white hover:bg-white/5 border-white/5 bg-white/5'
                 }`}
               >
@@ -504,7 +580,7 @@ export default function InsAdminLayout() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 15, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute right-0 mt-3 w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-5 z-50 flex flex-col max-h-[420px] overflow-hidden animate-in fade-in duration-200"
+                      className="fixed sm:absolute top-16 sm:top-auto left-4 right-4 sm:left-auto sm:right-0 mt-3 sm:mt-3 w-auto sm:w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-4 sm:p-5 z-50 flex flex-col max-h-[420px] overflow-hidden animate-in fade-in duration-200"
                     >
                       <div className="flex items-center justify-between pb-3.5 border-b border-white/5 mb-3 text-left">
                         <div className="flex items-center gap-2">
@@ -603,7 +679,7 @@ export default function InsAdminLayout() {
           </header>
 
           {/* Main Content View */}
-          <main className="flex-1 p-10 overflow-y-auto custom-scrollbar">
+          <main className="flex-1 p-4 sm:p-6 lg:p-10 overflow-y-auto custom-scrollbar">
              <Outlet />
           </main>
         </div>

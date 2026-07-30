@@ -154,7 +154,7 @@ export default function RegisterPage() {
   const handleSubmit = step === 'register' ? handleRegisterSubmit : handleOtpSubmit;
 
   return (
-    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-6 overflow-y-auto min-h-screen">
+    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-3 sm:p-6 overflow-y-auto min-h-screen py-6">
       {/* Background Blobs */}
       <div className="glow-blob bg-blue-600 w-[600px] h-[600px] -top-20 -left-20 opacity-20"></div>
       <div className="glow-blob bg-purple-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
@@ -162,20 +162,20 @@ export default function RegisterPage() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-5xl glass-panel rounded-[48px] overflow-hidden shadow-2xl relative z-10 my-8"
+        className="w-full max-w-5xl glass-panel rounded-3xl lg:rounded-[48px] overflow-hidden shadow-2xl relative z-10 my-4 sm:my-8"
       >
-        <div className="flex flex-col lg:flex-row min-h-[600px]">
+        <div className="flex flex-col lg:flex-row min-h-0 lg:min-h-[600px]">
           {/* Side Info */}
-          <div className="lg:w-1/3 bg-white/[0.03] p-12 border-r border-white/5 flex flex-col justify-between">
+          <div className="hidden lg:flex lg:w-1/3 bg-white/[0.03] p-8 lg:p-12 border-r border-white/5 flex-col justify-between">
             <div className="flex-1 flex flex-col justify-center items-center text-center">
               <img
                 src={greenLogo}
                 alt="EduCore"
-                className="w-50 h-50 object-contain mb-8 mx-auto drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+                className="w-40 h-40 object-contain mb-8 mx-auto drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]"
               />
               <h2 className="text-3xl font-bold text-white mb-4 font-elmessiri">EDUCORE</h2>
-              <p className="text-blue-200/40 font-medium text-2xl font-elmessiri">MODERN ONLINE LEARNING PLATFORM</p>
-              <p className="text-blue-200/40 font-medium font-elmessiri">Create your account and start your journey.</p>
+              <p className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-2">Modern Online Learning Platform</p>
+              <p className="text-blue-200/40 text-sm font-elmessiri">Create your account and start your journey.</p>
             </div>
             
             <div className="mt-12 flex flex-col items-center">
@@ -185,7 +185,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Form Content */}
-          <div className="lg:w-2/3 p-8 lg:p-16 bg-white/[0.01]">
+          <div className="lg:w-2/3 p-6 sm:p-10 lg:p-16 bg-white/[0.01]">
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-white mb-2 tracking-tighter neon-text">
                 {step === 'register' ? <>Create <span className="text-blue-400">Account</span></> : <>Verify <span className="text-blue-400">Security</span></>}

@@ -254,12 +254,12 @@ export default function MyLearning() {
         </div>
 
          <div className="flex flex-wrap items-center gap-4">
-            <div className="flex flex-wrap bg-white/5 p-1 rounded-xl border border-white/5">
+            <div className="flex overflow-x-auto max-w-full custom-scrollbar whitespace-nowrap bg-white/5 p-1 rounded-xl border border-white/5">
               {filterOptions.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => setFilter(option.value)}
-                  className={`px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
+                  className={`px-4 sm:px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${
                     filter === option.value ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-white/40 hover:text-white'
                   }`}
                 >

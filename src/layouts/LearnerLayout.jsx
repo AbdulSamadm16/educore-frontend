@@ -21,6 +21,11 @@ export default function LearnerLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Block non-learners from accessing learner private routes
   React.useEffect(() => {
@@ -378,13 +383,86 @@ export default function LearnerLayout() {
       <div className="glow-blob bg-blue-600 w-[600px] h-[600px] -top-20 -left-20 opacity-10"></div>
       <div className="glow-blob bg-cyan-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
 
-      {/* Sidebar Navigation */}
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 lg:hidden"
+            />
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-72 glass-panel border-r border-white/10 flex flex-col z-50 lg:hidden"
+            >
+              <div className="p-5 flex items-center justify-between border-b border-white/5">
+                <Link to="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+                  <img src={greenLogo} alt="EduCore" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-bold font-elmessiri text-white">EDUCORE</span>
+                </Link>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-white/60 hover:text-white rounded-xl bg-white/5"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
+                {filteredNavItems.map((item) => (
+                  <Link
+                    key={item.id}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all ${
+                      activeTab === item.id 
+                      ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30' 
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <item.icon size={20} className={activeTab === item.id ? 'text-blue-400' : ''} />
+                    <span className="text-sm font-semibold">{item.label}</span>
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="p-4 border-t border-white/5 mt-auto">
+                {user ? (
+                  <button
+                    onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 bg-red-500/10 border border-red-500/20"
+                  >
+                    <LogOut size={18} />
+                    <span className="text-sm font-bold">Log Out</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => { setIsMobileMenuOpen(false); navigate('/login'); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-blue-400 bg-blue-500/10 border border-blue-500/20"
+                  >
+                    <LogIn size={18} />
+                    <span className="text-sm font-bold">Log In</span>
+                  </button>
+                )}
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop Sidebar Navigation */}
       <aside 
         onMouseEnter={() => setIsSidebarOpen(true)}
         onMouseLeave={() => setIsSidebarOpen(false)}
-        className={`${
+        className={`hidden lg:flex ${
           isSidebarOpen ? 'w-72' : 'w-24'
-        } glass-panel border-r border-white/5 flex flex-col h-full transition-all duration-500 relative z-50`}
+        } glass-panel border-r border-white/5 flex-col h-full transition-all duration-500 relative z-40`}
       >
         {/* Logo Section */}
         <Link to="/" className="p-6 flex items-center gap-4 mb-0 group cursor-pointer">
@@ -470,32 +548,38 @@ export default function LearnerLayout() {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden">
+      <main className="flex-1 flex flex-col h-full overflow-hidden min-w-0">
         {/* Top bar */}
-        <header className="h-20 glass-panel border-b border-white/5 px-8 flex items-center justify-between z-40">
-          {location.pathname !== '/learner-dashboard/payment-history' ? (
-            <div className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-2xl px-6 py-2.5 w-full max-w-md group focus-within:border-blue-500/50 transition-all">
-              <Search className="text-white/20 group-focus-within:text-blue-400 transition-colors" size={20} />
-              <input 
-                type="text" 
-                placeholder={placeholder}
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="bg-transparent border-none outline-none text-white text-sm w-full placeholder:text-white/20"
-              />
-            </div>
-          ) : (
-            <div />
-          )}
+        <header className="h-16 md:h-20 glass-panel border-b border-white/5 px-4 md:px-8 flex items-center justify-between z-40 gap-3">
+          <div className="flex items-center gap-3 flex-1 max-w-md">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden p-2 text-white/80 hover:text-white glass-panel rounded-xl flex items-center justify-center"
+            >
+              <Menu size={22} />
+            </button>
+            {location.pathname !== '/learner-dashboard/payment-history' && (
+              <div className="flex items-center gap-2 sm:gap-4 bg-white/5 border border-white/10 rounded-2xl px-3 sm:px-6 py-2 w-full group focus-within:border-blue-500/50 transition-all">
+                <Search className="text-white/20 group-focus-within:text-blue-400 transition-colors shrink-0" size={18} />
+                <input 
+                  type="text" 
+                  placeholder={placeholder}
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="bg-transparent border-none outline-none text-white text-xs sm:text-sm w-full placeholder:text-white/20"
+                />
+              </div>
+            )}
+          </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 shrink-0">
             <button 
               onClick={() => navigate('/learner-dashboard/wishlist')}
-              className="relative p-2.5 text-white/40 hover:text-white transition-colors group"
+              className="relative p-2 sm:p-2.5 text-white/40 hover:text-white transition-colors group"
             >
-              <Heart size={22} className="group-hover:fill-red-500 group-hover:text-red-500 transition-all" />
+              <Heart size={20} className="group-hover:fill-red-500 group-hover:text-red-500 transition-all" />
               {wishlistCount > 0 && (
-                <span className="absolute top-1.5 right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-[#020617] text-[9px] font-black text-white flex items-center justify-center">
+                <span className="absolute top-1 right-0.5 sm:top-1.5 sm:right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-[#020617] text-[9px] font-black text-white flex items-center justify-center">
                   {wishlistCount}
                 </span>
               )}
@@ -510,7 +594,7 @@ export default function LearnerLayout() {
                     fetchNotifications();
                   }
                 }}
-                className={`relative p-2.5 glass-panel rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+                className={`relative p-2 sm:p-2.5 glass-panel rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
                   showNotifications ? 'text-blue-400 border-blue-500/30 bg-blue-500/5' : 'text-white/40 hover:text-white hover:bg-white/5 border-white/10'
                 }`}
               >
@@ -530,7 +614,7 @@ export default function LearnerLayout() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 15, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute right-0 mt-3 w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-5 z-50 flex flex-col max-h-[420px] overflow-hidden"
+                      className="fixed sm:absolute top-16 sm:top-auto left-4 right-4 sm:left-auto sm:right-0 mt-3 sm:mt-3 w-auto sm:w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-4 sm:p-5 z-50 flex flex-col max-h-[420px] overflow-hidden"
                     >
                       <div className="flex items-center justify-between pb-3.5 border-b border-white/5 mb-3">
                         <div className="flex items-center gap-2">
@@ -645,7 +729,7 @@ export default function LearnerLayout() {
         </header>
 
         {/* Dynamic Page Content */}
-        <div className="p-10 overflow-y-auto custom-scrollbar flex-1 h-full">
+        <div className="p-4 sm:p-6 lg:p-10 overflow-y-auto custom-scrollbar flex-1 h-full">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

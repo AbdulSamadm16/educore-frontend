@@ -36,15 +36,15 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-6">
+    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-3 sm:p-6 min-h-screen py-8">
       {/* Background Blobs */}
       <div className="glow-blob bg-blue-600 w-[600px] h-[600px] -top-20 -left-20 opacity-20"></div>
-      <div className="glow-blob bg-purple-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
+      <div className="glow-blob bg-cyan-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-7xl min-h-[700px] glass-panel rounded-[60px] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2 relative z-10 border-white/5"
+        className="w-full max-w-7xl min-h-0 lg:min-h-[700px] glass-panel rounded-3xl lg:rounded-[60px] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2 relative z-10 border-white/5"
       >
         {/* Logo Section */}
         <div className="hidden lg:flex flex-col items-center justify-center bg-white/[0.02] p-20 relative overflow-hidden border-r border-white/5">
@@ -62,24 +62,24 @@ export default function ForgotPassword() {
             />
             <div className="mt-8 text-center">
               <h1 className="text-5xl font-bold text-white mb-2 tracking-tight font-elmessiri">EDUCORE</h1>
-              <p className="text-blue-200/40 font-medium text-2xl font-elmessiri">MODERN ONLINE LEARNING PLATFORM</p>
+              <p className="text-blue-400 font-bold uppercase tracking-widest text-xs">MODERN ONLINE LEARNING PLATFORM</p>
             </div>
           </div>
           </motion.div>
         </div>
 
         {/* Form Section */}
-        <div className="flex items-center justify-center p-10 lg:p-20 bg-[#0b0f1a]/50">
+        <div className="flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-[#0b0f1a]/50">
           <div className="w-full max-w-md">
             <Link
               to="/login"
-              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-12 font-bold uppercase tracking-widest text-xs gap-2"
+              className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-8 sm:mb-12 font-bold uppercase tracking-widest text-xs gap-2"
             >
               <ArrowLeft size={16} />
               Back to Login
             </Link>
 
-            <h1 className="text-5xl font-black text-white mb-4 tracking-tight neon-text">
+            <h1 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight neon-text">
               Forgot <span className="text-blue-400">password</span>
             </h1>
             

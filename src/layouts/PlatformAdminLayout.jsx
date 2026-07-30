@@ -7,7 +7,7 @@ import {
   LogOut, LayoutDashboard, Users, UserCheck, GraduationCap, 
   BookOpen, Layers, ClipboardList, BarChart3, DollarSign, 
   Wallet, FileText, MessageSquare, Megaphone, Settings, 
-  Monitor, Search, Bell, HelpCircle, ChevronDown, ExternalLink,
+  Monitor, Search, Bell, HelpCircle, ChevronDown, ExternalLink, Menu, X,
   Info, CheckCircle, AlertTriangle, AlertCircle, Play, CheckCheck, ShieldAlert, Award
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,6 +20,11 @@ export default function PlatformAdminLayout() {
   const { searchQuery, setSearchQuery, placeholder } = useSearch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -358,8 +363,71 @@ export default function PlatformAdminLayout() {
 
   return (
     <div className="theme-platform dashboard-container mesh-bg flex min-h-screen bg-[#020617] overflow-hidden">
-      {/* Sidebar */}
-      <aside className="w-72 glass-panel border-r border-white/5 flex flex-col h-screen sticky top-0 z-50 bg-black/20">
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 lg:hidden"
+            />
+            <motion.aside
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 w-72 glass-panel border-r border-white/10 flex flex-col z-50 lg:hidden bg-slate-900"
+            >
+              <div className="p-5 flex items-center justify-between border-b border-white/5">
+                <Link to="/" className="flex items-center gap-3" onClick={() => setIsMobileMenuOpen(false)}>
+                  <img src={greenLogo} alt="EduCore" className="w-10 h-10 object-contain" />
+                  <span className="text-xl font-bold font-elmessiri text-white">EDUCORE</span>
+                </Link>
+                <button 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-white/60 hover:text-white rounded-xl bg-white/5"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto custom-scrollbar">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all ${
+                      activeTab === item.name 
+                      ? 'bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30' 
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <item.icon size={20} className={activeTab === item.name ? 'text-amber-400' : ''} />
+                    <span className="text-sm font-semibold">{item.name}</span>
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="p-4 border-t border-white/5 mt-auto">
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); handleLogout(); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 bg-red-500/10 border border-red-500/20"
+                >
+                  <LogOut size={18} />
+                  <span className="text-sm font-bold">Logout Session</span>
+                </button>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex w-72 glass-panel border-r border-white/5 flex-col h-screen sticky top-0 z-40 bg-black/20">
         <div className="p-8 pb-12 flex items-center gap-4">
           <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center border border-gray-600/30 flex-shrink-0">
              <img src={greenLogo} alt="EduCore" className="w-14 h-14 object-contain" />
@@ -407,17 +475,25 @@ export default function PlatformAdminLayout() {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Top bar */}
-        <header className="h-20 glass-panel border-b border-white/5 px-8 flex items-center justify-between sticky top-0 z-40 bg-black/10">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-950 dark:text-white tracking-tight mb-2">
-              {headerContent.title.split(' ')[0]} <span className="text-amber-500">{headerContent.title.split(' ').slice(1).join(' ')}</span>
-            </h2>
-            <p className="text-opacity-60 text-amber-500 text-lg font-medium hidden sm:flex items-center gap-2">
-              <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
-              {headerContent.subtitle}
-            </p>
+        <header className="h-16 md:h-20 glass-panel border-b border-white/5 px-4 md:px-8 flex items-center justify-between sticky top-0 z-40 bg-black/10 gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="lg:hidden p-2 text-white/80 hover:text-white glass-panel rounded-xl flex items-center justify-center shrink-0"
+            >
+              <Menu size={22} />
+            </button>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-base sm:text-xl md:text-2xl font-bold text-slate-950 dark:text-white tracking-tight truncate">
+                {headerContent.title.split(' ')[0]} <span className="text-amber-500">{headerContent.title.split(' ').slice(1).join(' ')}</span>
+              </h2>
+              <p className="text-opacity-60 text-amber-500 text-xs sm:text-sm font-medium hidden sm:flex items-center gap-2 truncate">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse shrink-0"></span>
+                {headerContent.subtitle}
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-6 ml-auto">
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-auto shrink-0">
             <div className="relative" ref={notificationRef}>
               <button 
                 onClick={() => {
@@ -427,7 +503,7 @@ export default function PlatformAdminLayout() {
                     fetchNotifications();
                   }
                 }}
-                className={`relative p-2.5 rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+                className={`relative p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
                   showNotifications ? 'text-amber-400 border-amber-500/30 bg-amber-500/5' : 'text-white/40 hover:text-white hover:bg-white/5 border-white/5 bg-white/5'
                 }`}
               >
@@ -447,7 +523,7 @@ export default function PlatformAdminLayout() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 15, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute right-0 mt-3 w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-5 z-50 flex flex-col max-h-[420px] overflow-hidden"
+                      className="fixed sm:absolute top-16 sm:top-auto left-4 right-4 sm:left-auto sm:right-0 mt-3 sm:mt-3 w-auto sm:w-80 glass-panel notification-dropdown border border-white/10 rounded-[24px] shadow-2xl p-4 sm:p-5 z-50 flex flex-col max-h-[420px] overflow-hidden"
                     >
                       <div className="flex items-center justify-between pb-3.5 border-b border-white/5 mb-3 text-left">
                         <div className="flex items-center gap-2">
@@ -546,7 +622,7 @@ export default function PlatformAdminLayout() {
         </header>
 
         {/* Dynamic View */}
-        <div className="p-8 overflow-y-auto custom-scrollbar flex-1">
+        <div className="p-4 sm:p-6 lg:p-8 overflow-y-auto custom-scrollbar flex-1">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

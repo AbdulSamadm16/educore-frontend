@@ -202,7 +202,7 @@ export default function Assignments() {
 
       {/* Filters and List */}
       <div className="space-y-6">
-        <div className="flex flex-wrap bg-white/5 p-1 rounded-2xl border border-white/5 max-w-max">
+        <div className="flex overflow-x-auto max-w-full custom-scrollbar whitespace-nowrap bg-white/5 p-1 rounded-2xl border border-white/5">
           {[
             { id: 'pending', label: `Pending (${pendingCount})` },
             { id: 'submitted', label: `Submitted (${submittedCount})` },
