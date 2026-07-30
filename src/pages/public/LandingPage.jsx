@@ -1,4 +1,5 @@
 import React from 'react';
+import greenLogo from '../../assets/green-logo.png';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -56,7 +57,7 @@ export default function LandingPage() {
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 glass-panel rounded-2xl">
         <div className="px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            <img src="/src/assets/green-logo.png" alt="EduCore" className="w-16 h-16 object-contain" />
+            <img src={greenLogo} alt="EduCore" className="w-16 h-16 object-contain" />
             <span className="text-xl font-black tracking-widest text-white">EDUCORE</span>
           </div>
           
@@ -96,7 +97,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, type: 'spring' }}
                 className="flex justify-center"
               >
-                <img src="/src/assets/green-logo.png" alt="EduCore" className="w-64 h-64 md:w-[450px] md:h-[450px] object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.3)]" />
+                <img src={greenLogo} alt="EduCore" className="w-64 h-64 md:w-[450px] md:h-[450px] object-contain drop-shadow-[0_0_50px_rgba(59,130,246,0.3)]" />
               </motion.div>
               
               <motion.div
@@ -259,7 +260,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10 bg-black text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
-          <img src="/src/assets/green-logo.png" alt="EduCore" className="w-8 h-8 object-contain" />
+          <img src={greenLogo} alt="EduCore" className="w-8 h-8 object-contain" />
           <span className="text-xl font-black tracking-widest">EDUCORE</span>
         </div>
         <p className="text-white/40 text-sm font-medium">

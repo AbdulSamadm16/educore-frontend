@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import greenLogo from '../../assets/green-logo.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/useAuth';
@@ -168,7 +169,7 @@ export default function RegisterPage() {
           <div className="lg:w-1/3 bg-white/[0.03] p-12 border-r border-white/5 flex flex-col justify-between">
             <div className="flex-1 flex flex-col justify-center items-center text-center">
               <img
-                src="src/assets/green-logo.png"
+                src={greenLogo}
                 alt="EduCore"
                 className="w-50 h-50 object-contain mb-8 mx-auto drop-shadow-[0_0_20px_rgba(59,130,246,0.3)]"
               />

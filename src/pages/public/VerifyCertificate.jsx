@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import greenLogo from '../../assets/green-logo.png';
 import { useParams, Link } from 'react-router-dom';
 import { ShieldCheck, Award, AlertTriangle, Loader2, Download, Calendar, User, BookOpen } from 'lucide-react';
 import apiClient from '../../services/api';
@@ -58,7 +59,7 @@ export default function VerifyCertificate() {
         
         <div className="text-center mb-10">
           <div className="w-20 h-20 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 mx-auto mb-6">
-             <img src="/src/assets/logo.png" alt="EduCore" className="w-14 h-14 object-contain brightness-0 invert" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+             <img src={greenLogo} alt="EduCore" className="w-14 h-14 object-contain brightness-0 invert" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
              <Award size={40} className="text-blue-400 hidden" />
           </div>
           <h1 className="text-3xl font-black text-white tracking-tight mb-2">Certificate Verification</h1>

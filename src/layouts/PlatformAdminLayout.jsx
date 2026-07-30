@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import greenLogo from '../assets/green-logo.png';
 import { useAuth } from '../context/useAuth';
 import { useSearch } from '../context/SearchContext';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
@@ -361,7 +362,7 @@ export default function PlatformAdminLayout() {
       <aside className="w-72 glass-panel border-r border-white/5 flex flex-col h-screen sticky top-0 z-50 bg-black/20">
         <div className="p-8 pb-12 flex items-center gap-4">
           <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center border border-gray-600/30 flex-shrink-0">
-             <img src="/src/assets/green-logo.png" alt="EduCore" className="w-14 h-14 object-contain" />
+             <img src={greenLogo} alt="EduCore" className="w-14 h-14 object-contain" />
           </div>
           <div className="flex flex-col">
              <h2 className="text-[25px] font-black text-amber-400 uppercase tracking-tighter leading-none font-elmessiri mb-1">EduCore</h2>

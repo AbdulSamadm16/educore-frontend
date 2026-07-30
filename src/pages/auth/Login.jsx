@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import greenLogo from '../../assets/green-logo.png';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/useAuth';
@@ -106,7 +107,7 @@ export default function Login() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent pointer-events-none"></div>
           <div className="flex flex-col items-center relative z-10">
             <img
-              src="src/assets/green-logo.png"
+              src={greenLogo}
               alt="EduCore text logo"
               className="w-60 h-60 object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
             />

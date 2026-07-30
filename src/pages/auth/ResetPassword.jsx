@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import greenLogo from '../../assets/green-logo.png';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -83,7 +84,7 @@ export default function ResetPassword() {
           >
             <div className="flex flex-col items-center relative z-10">
             <img
-              src="src/assets/green-logo.png"
+              src={greenLogo}
               alt="EduCore text logo"
               className="w-60 h-60 object-contain drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]"
             />

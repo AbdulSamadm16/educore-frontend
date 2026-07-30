@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import greenLogo from '../assets/green-logo.png';
 import { useAuth } from '../context/useAuth';
 import { useSearch } from '../context/SearchContext';
 import { useNavigate, Link, Outlet, useLocation } from 'react-router-dom';
@@ -389,7 +390,7 @@ export default function LearnerLayout() {
         <Link to="/" className="p-6 flex items-center gap-4 mb-0 group cursor-pointer">
           <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center shadow-lg border border-white/5 group-hover:border-blue-500/30 transition-all flex-shrink-0">
             <img 
-              src="/src/assets/green-logo.png" 
+              src={greenLogo} 
               alt="EduCore" 
               className="w-14 h-14 object-contain"
             />
