@@ -24,7 +24,7 @@ export default function ThemeToggle() {
       <div className="toggle-track">
         <div className="toggle-thumb" />
       </div>
-      <span style={{ fontSize: '12px' }}>
+      <span className="hidden sm:inline" style={{ fontSize: '12px' }}>
         {isDark ? 'Dark' : 'Light'}
       </span>
     </button>

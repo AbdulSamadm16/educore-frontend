@@ -550,16 +550,16 @@ export default function LearnerLayout() {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col h-full overflow-hidden min-w-0">
         {/* Top bar */}
-        <header className="h-16 md:h-20 glass-panel border-b border-white/5 px-4 md:px-8 flex items-center justify-between z-40 gap-3">
-          <div className="flex items-center gap-3 flex-1 max-w-md">
+        <header className="h-16 md:h-20 glass-panel border-b border-white/5 px-2.5 sm:px-6 md:px-8 flex items-center justify-between z-40 gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 flex-1 max-w-md min-w-0">
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 text-white/80 hover:text-white glass-panel rounded-xl flex items-center justify-center"
+              className="lg:hidden p-1.5 sm:p-2 text-white/80 hover:text-white glass-panel rounded-xl flex items-center justify-center shrink-0"
             >
-              <Menu size={22} />
+              <Menu size={20} />
             </button>
             {location.pathname !== '/learner-dashboard/payment-history' && (
-              <div className="flex items-center gap-2 sm:gap-4 bg-white/5 border border-white/10 rounded-2xl px-3 sm:px-6 py-2 w-full group focus-within:border-blue-500/50 transition-all">
+              <div className="hidden sm:flex items-center gap-2 sm:gap-4 bg-white/5 border border-white/10 rounded-2xl px-3 sm:px-6 py-2 w-full group focus-within:border-blue-500/50 transition-all">
                 <Search className="text-white/20 group-focus-within:text-blue-400 transition-colors shrink-0" size={18} />
                 <input 
                   type="text" 
@@ -572,7 +572,7 @@ export default function LearnerLayout() {
             )}
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-4 md:gap-6 shrink-0 ml-auto">
             <button 
               onClick={() => navigate('/learner-dashboard/wishlist')}
               className="relative p-2 sm:p-2.5 text-white/40 hover:text-white transition-colors group"
@@ -700,10 +700,10 @@ export default function LearnerLayout() {
               </AnimatePresence>
             </div>
             <ThemeToggle />
-            <div className="h-8 w-[1px] bg-white/5" />
+            <div className="hidden sm:block h-8 w-[1px] bg-white/5" />
             <div 
               onClick={() => user ? navigate('/profile') : navigate('/login')} 
-              className="flex items-center gap-3 group cursor-pointer"
+              className="flex items-center gap-2 sm:gap-3 group cursor-pointer shrink-0"
             >
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
@@ -713,12 +713,12 @@ export default function LearnerLayout() {
                   {user ? user.role : 'Public View'}
                 </p>
               </div>
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 p-[1px]">
-                 <div className="w-full h-full rounded-[15px] bg-[#020617] flex items-center justify-center overflow-hidden">
+              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 p-[1px] shrink-0">
+                 <div className="w-full h-full rounded-[11px] sm:rounded-[15px] bg-[#020617] flex items-center justify-center overflow-hidden">
                     {user?.profile?.avatarUrl ? (
                       <img src={user.profile.avatarUrl} alt="" className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-xl font-black text-blue-400">
+                      <span className="text-sm sm:text-xl font-black text-blue-400">
                         {user ? user.name?.[0] : '?'}
                       </span>
                     )}

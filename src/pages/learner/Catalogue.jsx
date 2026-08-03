@@ -428,11 +428,11 @@ function CourseCard({ course, index, viewMode, inWishlist, onWishlistToggle, isT
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.05 }}
         className={`glass-card group overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-500 h-full ${
-          isGrid ? 'rounded-[32px] flex flex-col' : 'rounded-3xl flex gap-8 p-4'
+          isGrid ? 'rounded-[32px] flex flex-col' : 'rounded-2xl sm:rounded-3xl flex flex-col sm:flex-row gap-4 sm:gap-8 p-3 sm:p-4'
         }`}
       >
         {/* Thumbnail Container */}
-        <div className={`relative overflow-hidden ${isGrid ? 'aspect-video' : 'w-72 h-44 rounded-2xl shrink-0'}`}>
+        <div className={`relative overflow-hidden ${isGrid ? 'aspect-video' : 'w-full sm:w-72 h-48 sm:h-44 rounded-xl sm:rounded-2xl shrink-0'}`}>
           <img 
             src={course.thumbnailUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80'} 
             alt={course.title} 
@@ -479,7 +479,7 @@ function CourseCard({ course, index, viewMode, inWishlist, onWishlistToggle, isT
         </div>
 
         {/* Content Container */}
-        <div className={`flex flex-col flex-1 ${isGrid ? 'p-8' : 'py-2 pr-4'}`}>
+        <div className={`flex flex-col flex-1 min-w-0 ${isGrid ? 'p-6 sm:p-8' : 'p-2 sm:py-2 sm:pr-4'}`}>
           <div className="flex justify-between items-start mb-2 gap-4">
             <span className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.2em]">{course.category}</span>
             <div className="flex items-center gap-1.5 text-amber-400">
@@ -489,18 +489,18 @@ function CourseCard({ course, index, viewMode, inWishlist, onWishlistToggle, isT
             </div>
           </div>
 
-          <h3 className={`font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors mb-1 leading-snug ${isGrid ? 'text-xl' : 'text-2xl'}`}>
+          <h3 className={`font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors mb-1 leading-snug ${isGrid ? 'text-lg sm:text-xl' : 'text-base sm:text-2xl'}`}>
             {course.title}
           </h3>
 
-          <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest mb-4">By {course.authorId?.name || 'Instructor'}</p>
+          <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest mb-3">By {course.authorId?.name || 'Instructor'}</p>
 
-          <p className={`text-white/40 font-medium mb-6 line-clamp-2 ${isGrid ? 'text-sm' : 'text-base'}`}>
+          <p className={`text-white/40 font-medium mb-4 sm:mb-6 line-clamp-2 ${isGrid ? 'text-sm' : 'text-xs sm:text-base'}`}>
             {course.shortDescription}
           </p>
 
           {/* Footer Meta */}
-          <div className={`mt-auto flex items-center justify-between border-t border-white/5 ${isGrid ? 'pt-6' : 'pt-4'}`}>
+          <div className={`mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-white/5 ${isGrid ? 'pt-6' : 'pt-4'}`}>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-white/40">
                 <Clock size={16} />
@@ -523,7 +523,7 @@ function CourseCard({ course, index, viewMode, inWishlist, onWishlistToggle, isT
                     <span className="text-xs font-black uppercase tracking-widest">Enrolled</span>
                   </div>
                 ) : (
-                  <p className="text-xl font-black text-white leading-none">
+                  <p className="text-lg sm:text-xl font-black text-white leading-none">
                     {course.isFree ? 'FREE' : `${course.currency || '$'}${course.price}`}
                   </p>
                 )}

@@ -720,8 +720,8 @@ export default function TutorLayout() {
               </AnimatePresence>
             </div>
             <ThemeToggle />
-            <div className="h-8 w-[1px] bg-white/5" />
-            <Link to="/profile" className="flex items-center gap-3 cursor-pointer group">
+            <div className="hidden sm:block h-8 w-[1px] bg-white/5" />
+            <Link to="/profile" className="flex items-center gap-2 sm:gap-3 cursor-pointer group shrink-0">
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-bold text-white group-hover:text-purple-400 transition-colors">
                   {user ? user.name : 'Guest User'}
@@ -730,11 +730,11 @@ export default function TutorLayout() {
                   {user ? user.role : 'Public View'}
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20 ring-2 ring-purple-500/20 overflow-hidden">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20 ring-2 ring-purple-500/20 overflow-hidden shrink-0">
                 {user?.profile?.avatarUrl ? (
                   <img src={user.profile.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
-                  <UserIcon size={20} className="text-white" />
+                  <UserIcon size={18} className="text-white" />
                 )}
               </div>
             </Link>

@@ -305,14 +305,14 @@ function CourseCard({ enrollment, index }) {
   const { course, progressPercentage: progress } = enrollment;
 
   return (
-    <Link to={`/learner-dashboard/catalogue/${course._id || course.id}`} className="block">
+    <Link to={`/learner-dashboard/catalogue/${course._id || course.id}`} className="block w-full min-w-0">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1 }}
-        className="glass-card p-6 rounded-[32px] border border-white/5 hover:border-blue-500/20 transition-all group flex flex-col md:flex-row gap-8 items-center"
+        className="glass-card p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-white/5 hover:border-blue-500/20 transition-all group flex flex-col md:flex-row gap-4 sm:gap-8 items-stretch md:items-center w-full min-w-0"
       >
-        <div className="w-full md:w-56 h-36 rounded-2xl overflow-hidden relative shadow-2xl shrink-0">
+        <div className="w-full md:w-56 h-40 sm:h-36 rounded-2xl overflow-hidden relative shadow-2xl shrink-0">
           <img 
             src={course.thumbnailUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80'} 
             alt={course.title} 
@@ -332,15 +332,15 @@ function CourseCard({ enrollment, index }) {
           </div>
         </div>
 
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between mb-2">
-             <h3 className="text-xl font-bold text-white truncate leading-tight group-hover:text-blue-400 transition-colors">{course.title}</h3>
-             <span className="text-[10px] font-black text-blue-400 bg-blue-500/10 px-2 py-1 rounded-lg uppercase tracking-widest border border-blue-500/20">
+        <div className="flex-1 min-w-0 w-full">
+          <div className="flex items-center justify-between mb-2 gap-2 min-w-0 w-full">
+             <h3 className="text-sm sm:text-lg md:text-xl font-bold text-white min-w-0 flex-1 truncate leading-tight group-hover:text-blue-400 transition-colors">{course.title}</h3>
+             <span className="shrink-0 text-[10px] font-black text-blue-400 bg-blue-500/10 px-2 py-1 rounded-lg uppercase tracking-widest border border-blue-500/20">
                {progress}%
              </span>
           </div>
           
-          <p className="text-sm text-white/40 line-clamp-1 mb-6 font-medium">
+          <p className="text-xs sm:text-sm text-white/40 line-clamp-1 mb-4 sm:mb-6 font-medium">
             {course.category} • {course.totalLessons} Lessons
           </p>
 

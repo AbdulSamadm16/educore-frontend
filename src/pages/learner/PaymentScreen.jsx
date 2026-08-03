@@ -470,53 +470,53 @@ export default function PaymentScreen() {
 
           {/* Payment methods */}
           {isPaidCourse && (
-            <div className="glass-card border border-white/5 rounded-[32px] p-8">
-              <h2 className="text-sm font-black text-white uppercase tracking-widest mb-5">
+            <div className="glass-card border border-white/5 rounded-[24px] sm:rounded-[32px] p-4 sm:p-8">
+              <h2 className="text-xs sm:text-sm font-black text-white uppercase tracking-widest mb-4 sm:mb-5">
                 Accepted Payment Methods
               </h2>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {methodIcons.map(({ label, icon, color }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-3 p-4 rounded-2xl bg-white/3 border border-white/8"
+                    className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/3 border border-white/8"
                   >
                     <span className={`${color} shrink-0`}>{icon}</span>
-                    <span className="text-white/70 text-xs font-bold">{label}</span>
+                    <span className="text-white/70 text-[11px] sm:text-xs font-bold">{label}</span>
                   </div>
                 ))}
               </div>
-              <p className="text-white/25 text-[11px] mt-4 leading-relaxed">
+              <p className="text-white/25 text-[10px] sm:text-[11px] mt-4 leading-relaxed">
                 All payment methods are handled securely through Razorpay. EduCore never stores your card details.
               </p>
             </div>
           )}
 
           {/* Billing Details & Checkout Form */}
-          <form onSubmit={handlePay} className="space-y-6">
+          <form onSubmit={handlePay} className="space-y-4 sm:space-y-6">
             {isPaidCourse && !isEnrolled && (
-            <div className="glass-card border border-white/5 rounded-[32px] p-8 space-y-5">
-              <h2 className="text-sm font-black text-white uppercase tracking-widest mb-2">
+            <div className="glass-card border border-white/5 rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 space-y-4 sm:space-y-5">
+              <h2 className="text-xs sm:text-sm font-black text-white uppercase tracking-widest mb-1 sm:mb-2">
                 Billing Information
               </h2>
-              <p className="text-white/40 text-xs mb-4">Required for generating your tax invoice.</p>
+              <p className="text-white/40 text-[11px] sm:text-xs mb-3 sm:mb-4">Required for generating your tax invoice.</p>
               
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-2">
+                  <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5 sm:mb-2">
                     Phone Number
                   </label>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 min-w-0 w-full">
                     <select
                       value={billingPhoneCode}
                       onChange={(e) => setBillingPhoneCode(e.target.value)}
-                      className="w-24 bg-white/5 border border-white/10 rounded-2xl px-3 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-sm appearance-none cursor-pointer"
+                      className="w-20 sm:w-28 shrink-0 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-2 sm:px-3 py-3 sm:py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-xs sm:text-sm appearance-none cursor-pointer text-center"
                     >
-                      <option value="+91" className="bg-slate-900 text-white">IN (+91)</option>
-                      <option value="+1" className="bg-slate-900 text-white">US (+1)</option>
-                      <option value="+44" className="bg-slate-900 text-white">UK (+44)</option>
-                      <option value="+61" className="bg-slate-900 text-white">AU (+61)</option>
-                      <option value="+971" className="bg-slate-900 text-white">UAE (+971)</option>
-                      <option value="+65" className="bg-slate-900 text-white">SG (+65)</option>
+                      <option value="+91" className="bg-slate-900 text-white">+91 (IN)</option>
+                      <option value="+1" className="bg-slate-900 text-white">+1 (US)</option>
+                      <option value="+44" className="bg-slate-900 text-white">+44 (UK)</option>
+                      <option value="+61" className="bg-slate-900 text-white">+61 (AU)</option>
+                      <option value="+971" className="bg-slate-900 text-white">+971 (UAE)</option>
+                      <option value="+65" className="bg-slate-900 text-white">+65 (SG)</option>
                     </select>
                     <input
                       type="tel"
@@ -526,12 +526,12 @@ export default function PaymentScreen() {
                       placeholder="9876543210"
                       pattern="[0-9\s\-]{5,15}"
                       title="Please enter a valid phone number (5 to 15 digits)"
-                      className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-sm"
+                      className="flex-1 min-w-0 w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-xs sm:text-sm"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-2">
+                  <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest block mb-1.5 sm:mb-2">
                     Billing Address
                   </label>
                   <textarea
@@ -540,7 +540,7 @@ export default function PaymentScreen() {
                     required
                     rows="3"
                     placeholder="Enter your full billing address..."
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-sm resize-none custom-scrollbar"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-3 sm:py-3.5 text-white focus:outline-none focus:ring-2 focus:ring-violet-500/30 transition-all font-medium text-xs sm:text-sm resize-none custom-scrollbar"
                   />
                 </div>
               </div>
@@ -548,16 +548,16 @@ export default function PaymentScreen() {
           )}
 
           {/* Trust badges */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4">
             {[
-              { icon: <Shield size={18} className="text-emerald-400" />, label: 'Server-side verified', sub: 'Signature checked' },
-              { icon: <Zap size={18} className="text-violet-400" />, label: 'Instant Access', sub: 'Unlock on success' },
-              { icon: <Lock size={18} className="text-blue-400" />, label: 'Secure & Encrypted', sub: 'Razorpay PCI-DSS' },
+              { icon: <Shield size={16} className="text-emerald-400" />, label: 'Server-side verified', sub: 'Signature checked' },
+              { icon: <Zap size={16} className="text-violet-400" />, label: 'Instant Access', sub: 'Unlock on success' },
+              { icon: <Lock size={16} className="text-blue-400" />, label: 'Secure & Encrypted', sub: 'Razorpay PCI-DSS' },
             ].map(({ icon, label, sub }) => (
-              <div key={label} className="p-4 rounded-2xl bg-white/3 border border-white/8 flex flex-col items-center text-center gap-2">
+              <div key={label} className="p-2 sm:p-4 rounded-xl sm:rounded-2xl bg-white/3 border border-white/8 flex flex-col items-center text-center gap-1 sm:gap-2">
                 {icon}
-                <p className="text-white text-[11px] font-black uppercase tracking-widest leading-tight">{label}</p>
-                <p className="text-white/30 text-[10px]">{sub}</p>
+                <p className="text-white text-[9px] sm:text-[11px] font-black uppercase tracking-widest leading-tight">{label}</p>
+                <p className="text-white/30 text-[8px] sm:text-[10px] hidden sm:block">{sub}</p>
               </div>
             ))}
           </div>
@@ -567,7 +567,7 @@ export default function PaymentScreen() {
             id="pay-now-btn"
             type="submit"
             disabled={submitting || !course}
-            className="w-full py-5 rounded-2xl font-black text-sm uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
+            className="w-full px-4 sm:px-6 py-4 sm:py-5 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all flex items-center justify-center gap-3 sm:gap-4 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
             style={{
               background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
               boxShadow: submitting ? 'none' : '0 12px 40px rgba(124,58,237,0.35)',
@@ -575,22 +575,22 @@ export default function PaymentScreen() {
           >
             {submitting ? (
               <>
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={18} className="animate-spin shrink-0 ml-2" />
                 {loadingLabel}
               </>
             ) : isEnrolled ? (
               <>
-                <CheckCircle size={18} />
+                <CheckCircle size={18} className="shrink-0 ml-2" />
                 Go to Course
               </>
             ) : isPaidCourse ? (
               <>
-                <CreditCard size={18} />
+                <CreditCard size={18} className="shrink-0 ml-2 sm:ml-3" />
                 Pay {formatMoney(finalPrice, currency)} — Powered by Razorpay
               </>
             ) : (
               <>
-                <CheckCircle size={18} />
+                <CheckCircle size={18} className="shrink-0 ml-2" />
                 Enroll for Free
               </>
             )}

@@ -418,10 +418,10 @@ function LearningCard({ enrollment, index, isOpening, onOpenCourse, onCertificat
           </div>
         </div>
 
-        <div className="p-8 flex-1 flex flex-col">
-          <div className="mb-6">
-             <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] mb-2 block">{course.category}</span>
-             <h3 className="text-xl font-bold text-white line-clamp-2 leading-tight group-hover:text-blue-400 transition-colors">{course.title}</h3>
+        <div className="p-4 sm:p-8 flex-1 flex flex-col min-w-0">
+          <div className="mb-4 sm:mb-6">
+             <span className="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] mb-1 sm:mb-2 block">{course.category}</span>
+             <h3 className="text-base sm:text-xl font-bold text-white line-clamp-2 leading-tight group-hover:text-blue-400 transition-colors break-words">{course.title}</h3>
           </div>
 
           <div className="mt-auto space-y-6">
