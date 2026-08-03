@@ -436,11 +436,11 @@ export default function InsAdminLayout() {
                   } else if (location.pathname === '/ins-admin/users') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         User <span className="text-emerald-400">Management</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Manage users and permissions
                       </p>
                     </>
@@ -448,11 +448,11 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/attendance') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Attendance <span className="text-emerald-400">Tracking</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Mark student participation and export class performance logs
                       </p>
                     </>
@@ -460,10 +460,10 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/courses') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Course <span className="text-emerald-400">Management</span>
                       </h1>
-                      <p className="text-xs text-white/30 font-medium uppercase tracking-widest">
+                      <p className="text-[10px] sm:text-xs text-white/30 font-medium uppercase tracking-widest hidden sm:block truncate">
                         Audit, moderate, and feature educational courses across the global network.
                       </p>
                     </>
@@ -471,10 +471,10 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/bulk-enrollment') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Bulk <span className="text-emerald-400">Enrollment</span>
                       </h1>
-                      <p className="text-xs text-white/30 font-medium uppercase tracking-widest">
+                      <p className="text-[10px] sm:text-xs text-white/30 font-medium uppercase tracking-widest hidden sm:block truncate">
                         Enroll learner batches into published courses.
                       </p>
                     </>
@@ -482,10 +482,10 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/logs') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Brevo <span className="text-emerald-400">System Logs</span>
                       </h1>
-                      <p className="text-xs text-white/30 font-medium uppercase tracking-widest">
+                      <p className="text-[10px] sm:text-xs text-white/30 font-medium uppercase tracking-widest hidden sm:block truncate">
                         Monitor real-time mail invites, verification tokens, and dispatch states.
                       </p>
                     </>
@@ -493,11 +493,11 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/revenue') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Platform <span className="text-emerald-400">Revenue</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Monitor platform financial performance
                       </p>
                     </>
@@ -505,11 +505,11 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/discussion-moderation') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Discussion <span className="text-emerald-400">Moderation</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Audit reported posts and unban appeals
                       </p>
                     </>
@@ -517,11 +517,11 @@ export default function InsAdminLayout() {
                 } else if (location.pathname === '/ins-admin/certificates') {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Institution <span className="text-emerald-400">Certificates</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Manage institution-wide certificate templates
                       </p>
                     </>
@@ -529,11 +529,11 @@ export default function InsAdminLayout() {
                 } else if (location.pathname.startsWith('/ins-admin/support')) {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">
                         Help & <span className="text-emerald-400">Support</span>
                       </h1>
-                      <p className="text-xs text-emerald-400/60 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                      <p className="text-[10px] sm:text-xs text-emerald-400/60 font-bold uppercase tracking-widest hidden sm:flex items-center gap-2 truncate">
+                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shrink-0"></span>
                         Manage institution support tickets
                       </p>
                     </>
@@ -541,8 +541,8 @@ export default function InsAdminLayout() {
                 } else {
                   return (
                     <>
-                      <h1 className="text-3xl font-black text-white mb-1 tracking-tight">{activeTab}</h1>
-                      <p className="text-xs text-white/30 font-medium uppercase tracking-widest">Institution Administration Panel</p>
+                      <h1 className="text-xs sm:text-base md:text-2xl font-black text-white tracking-tight truncate">{activeTab}</h1>
+                      <p className="text-[10px] sm:text-xs text-white/30 font-medium uppercase tracking-widest hidden sm:block truncate">Institution Administration Panel</p>
                     </>
                   );
                 }

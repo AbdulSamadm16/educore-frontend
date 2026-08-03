@@ -457,135 +457,135 @@ export default function TutorLayout() {
               <Menu size={22} />
             </button>
           {location.pathname === '/tutor-dashboard' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <LayoutDashboard size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <LayoutDashboard size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">
                   Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">{user?.name?.split(' ')[0] || 'Tutor'}</span>
                 </h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Let's inspire and empower more learners today!</p>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Let's inspire and empower more learners today!</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/grade-centre' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <GraduationCap size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <GraduationCap size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Grade Centre</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Review student scripts and submissions</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Grade Centre</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Review student scripts and submissions</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/discussions' || location.pathname.startsWith('/tutor-dashboard/discussions/') ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <MessagesSquare size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <MessagesSquare size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Discussions</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Browse and respond to lesson Q&A across your courses</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Discussions</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Browse and respond to lesson Q&A across your courses</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/live-sessions/schedule' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <CalendarPlus size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <CalendarPlus size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Schedule Live Class</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Google Meet · Create a real-time class for an enrolled course</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Schedule Live Class</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Google Meet · Create a real-time class for an enrolled course</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/live-sessions/manage' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <CalendarClock size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <CalendarClock size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Manage Sessions</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Live Classes · View and organize scheduled virtual sessions</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Manage Sessions</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Live Classes · View and organize scheduled virtual sessions</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/attendance' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <ClipboardList size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <ClipboardList size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Attendance</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Mark student participation and export class performance logs</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Attendance</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Mark student participation and export class performance logs</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/students' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <Users size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <Users size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Students</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Monitor your students' learning progress and course enrollments</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Students</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Monitor your students' learning progress and course enrollments</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/analytics' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <BarChart3 size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <BarChart3 size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Course Analytics</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Track completion rates, drop-offs, and learner metrics across your courses</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Course Analytics</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Track completion rates, drop-offs, and learner metrics across your courses</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/earnings' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <DollarSign size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <DollarSign size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Earnings</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Monitor your revenue and payout history</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Earnings</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Monitor your revenue and payout history</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/reviews' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <Star size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <Star size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Reviews</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Hear what your students have to say about your courses</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Reviews</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Hear what your students have to say about your courses</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/messages' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <MessageSquare size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <MessageSquare size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Messages</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Direct communication with your students</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Messages</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Direct communication with your students</p>
               </div>
             </div>
           ) : location.pathname.startsWith('/tutor-dashboard/support') ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <HelpCircle size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <HelpCircle size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Help & Support</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Manage your service requests and technical support tickets.</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Help & Support</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Manage your service requests and technical support tickets.</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/settings' ? (
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-purple-500/10 rounded-xl text-purple-400">
-                <Settings size={20} />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="p-1.5 sm:p-2 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                <Settings size={18} />
               </div>
-              <div>
-                <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Settings</h2>
-                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-1">Customize your tutor experience and account preferences</p>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-base md:text-xl font-black text-white uppercase tracking-wider leading-none truncate">Settings</h2>
+                <p className="text-[10px] text-purple-400 font-bold uppercase tracking-wider mt-0.5 hidden sm:block truncate">Customize your tutor experience and account preferences</p>
               </div>
             </div>
           ) : location.pathname === '/tutor-dashboard/courses' ? (

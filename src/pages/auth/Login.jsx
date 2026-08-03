@@ -87,7 +87,7 @@ export default function Login() {
   };
 
   return (
-    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-3 sm:p-6 min-h-screen py-8">
+    <div className="theme-learner dashboard-container mesh-bg flex items-center justify-center p-3 sm:p-6 min-h-screen py-4 sm:py-8">
       {/* Background Blobs */}
       <div className="glow-blob bg-blue-600 w-[600px] h-[600px] -top-20 -left-20 opacity-20"></div>
       <div className="glow-blob bg-cyan-600 w-[500px] h-[500px] bottom-0 right-0 opacity-10"></div>
@@ -95,7 +95,7 @@ export default function Login() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-7xl min-h-0 lg:min-h-[700px] glass-panel rounded-3xl lg:rounded-[48px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative z-10"
+        className="w-full max-w-md lg:max-w-7xl min-h-0 lg:min-h-[700px] glass-panel rounded-2xl sm:rounded-3xl lg:rounded-[48px] overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative z-10"
       >
         {/* Logo Section */}
         <motion.div
@@ -125,44 +125,50 @@ export default function Login() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="flex items-center justify-center p-6 sm:p-12 lg:p-20 bg-white/[0.02]"
+          className="flex items-center justify-center p-5 sm:p-10 lg:p-20 bg-white/[0.02]"
         >
           <div className="w-full max-w-md">
-            <div className="mb-8 sm:mb-12">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-4 tracking-tighter neon-text">
-                Login <span className="text-blue-400">Portal</span>
-              </h1>
-              <p className="text-blue-200/40 text-sm sm:text-lg">Welcome Back</p>
+            {/* Mobile Brand Header */}
+            <div className="flex lg:hidden items-center gap-2.5 mb-4">
+              <img src={greenLogo} alt="EduCore" className="w-8 h-8 object-contain" />
+              <span className="text-lg font-bold text-white font-elmessiri tracking-wider">EDUCORE</span>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-blue-300/40 uppercase tracking-widest ml-1">Email Id</label>
+            <div className="mb-6 sm:mb-12">
+              <h1 className="text-2xl sm:text-5xl lg:text-6xl font-bold text-white mb-1.5 sm:mb-4 tracking-tighter neon-text">
+                Login <span className="text-blue-400">Portal</span>
+              </h1>
+              <p className="text-blue-200/40 text-xs sm:text-lg">Welcome Back</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="space-y-1">
+                <label className="text-[10px] sm:text-xs font-bold text-blue-300/40 uppercase tracking-widest ml-1">Email Id</label>
                 <input
                   type="email"
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full bg-white/5 border border-white/10 px-4 py-3 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   required
                 />
               </div>
 
-               <div className="space-y-1.5 relative">
-                <label className="text-xs font-bold text-blue-300/40 uppercase tracking-widest ml-1">Password</label>
+               <div className="space-y-1 relative">
+                <label className="text-[10px] sm:text-xs font-bold text-blue-300/40 uppercase tracking-widest ml-1">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all pr-20"
+                    className="w-full bg-white/5 border border-white/10 px-4 py-3 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl text-sm sm:text-base text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all pr-14 sm:pr-20"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-6 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-350 transition-colors"
+                    className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-350 transition-colors"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -172,7 +178,7 @@ export default function Login() {
               <div className="flex justify-end">
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-blue-300/40 hover:text-blue-400 transition-colors"
+                  className="text-xs sm:text-sm text-blue-300/40 hover:text-blue-400 transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -182,7 +188,7 @@ export default function Login() {
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-sm font-medium"
+                  className="p-3 sm:p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-center text-xs sm:text-sm font-medium"
                 >
                   {error}
                 </motion.div>
@@ -191,13 +197,13 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full neon-button text-white py-5 rounded-2xl font-bold text-lg transition-all disabled:opacity-50 mt-4 shadow-xl shadow-blue-600/20"
+                className="w-full neon-button text-white py-3.5 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all disabled:opacity-50 mt-2 sm:mt-4 shadow-xl shadow-blue-600/20"
               >
                 {loading ? 'Authenticating...' : 'Login'}
               </button>
             </form>
 
-            <div className="mt-12 text-center">
+            <div className="mt-8 sm:mt-12 text-center text-xs sm:text-base">
               <Link
                 to="/register"
                 className="text-blue-200/40 hover:text-blue-400 font-bold tracking-tight transition-all"
