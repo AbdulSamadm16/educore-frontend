@@ -611,7 +611,7 @@ body {
 }
 
 /* Outer container for InsAdmin (fixed bg) */
-.light-mode .min-h-screen.bg-\[#020617\] {
+.light-mode .min-h-screen[class*="bg-[#020617]"] {
   background: linear-gradient(135deg, #e8f0fe 0%, #f0f4f8 50%, #e8f4f0 100%) !important;
 }
 
@@ -636,9 +636,6 @@ body {
 }
 
 /* Universal hardcoded dark backgrounds overrides in light mode */
-.light-mode .bg-\[\#0f172a\],
-.light-mode .bg-\[\#020617\],
-.light-mode .bg-\[\#0b0f1a\],
 .light-mode [class*="bg-[#0f172a]"],
 .light-mode [class*="bg-[#020617]"],
 .light-mode [class*="bg-[#0b0f1a]"] {
@@ -647,8 +644,6 @@ body {
 }
 
 /* Universal hardcoded dark backdrop overlays overrides in light mode */
-.light-mode .bg-\[\#020617\]\/90,
-.light-mode .bg-\[\#06080f\]\/90,
 .light-mode [class*="bg-[#020617]/90"],
 .light-mode [class*="bg-[#06080f]/90"] {
   background-color: rgba(240, 244, 248, 0.85) !important;
