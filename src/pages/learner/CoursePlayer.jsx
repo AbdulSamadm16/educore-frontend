@@ -67,14 +67,26 @@ const CoursePlayer = () => {
   const isSubmittingQuizRef = useRef(false);
   const isSubmittingAssignmentRef = useRef(false);
 
+  const isMatchingLesson = (l, targetId) => {
+    if (!l || targetId === undefined || targetId === null) return false;
+    const tid = String(targetId);
+    return (
+      (l.lessonId && String(l.lessonId) === tid) ||
+      (l._id && String(l._id) === tid) ||
+      (l.id && String(l.id) === tid)
+    );
+  };
+
+  const getLessonId = (l) => l?.lessonId || l?._id || l?.id;
+
   // Derived state for the active lesson
   const activeLesson = (() => {
-    if (!courseData) return null;
+    if (!courseData || !Array.isArray(courseData.modules)) return null;
     
     let target = null;
     if (lessonId) {
       for (const mod of courseData.modules) {
-        const lesson = mod.lessons.find(l => String(l.lessonId) === String(lessonId));
+        const lesson = (mod.lessons || []).find(l => isMatchingLesson(l, lessonId));
         if (lesson) {
           target = lesson;
           break;
@@ -85,7 +97,7 @@ const CoursePlayer = () => {
     if (target && target.isLocked) {
       let lastUnlocked = null;
       for (const mod of courseData.modules) {
-        for (const l of mod.lessons) {
+        for (const l of mod.lessons || []) {
           if (!l.isLocked) {
             lastUnlocked = l;
           }
@@ -96,7 +108,7 @@ const CoursePlayer = () => {
       }
     }
 
-    if (!target && courseData.modules.length > 0 && courseData.modules[0].lessons.length > 0) {
+    if (!target && courseData.modules.length > 0 && (courseData.modules[0].lessons || []).length > 0) {
       return courseData.modules[0].lessons[0];
     }
 
@@ -140,9 +152,10 @@ const CoursePlayer = () => {
         setCourseData(res.data);
 
         let targetLesson = null;
+        const modules = Array.isArray(res.data?.modules) ? res.data.modules : [];
         if (lessonId) {
-          for (const mod of res.data.modules) {
-            const lesson = mod.lessons.find(l => String(l.lessonId) === String(lessonId));
+          for (const mod of modules) {
+            const lesson = (mod.lessons || []).find(l => isMatchingLesson(l, lessonId));
             if (lesson) {
               targetLesson = lesson;
               break;
@@ -152,11 +165,11 @@ const CoursePlayer = () => {
 
         if (!targetLesson) {
           const mockPlayback = await videoService.getLessonPlayback(lessonId || 'les_2', { signal });
-          for (const mod of res.data.modules) {
-            const lesson = mod.lessons.find(l => String(l.lessonId) === String(mockPlayback.data.lessonId));
+          for (const mod of modules) {
+            const lesson = (mod.lessons || []).find(l => isMatchingLesson(l, mockPlayback.data?.lessonId));
             if (lesson) {
               targetLesson = lesson;
-              if (mockPlayback.data.lastPosition > 0) {
+              if (mockPlayback.data?.lastPosition > 0) {
                 targetLesson.secondsWatched = mockPlayback.data.lastPosition;
               }
               break;
@@ -164,34 +177,31 @@ const CoursePlayer = () => {
           }
         }
 
-        if (!targetLesson && res.data.modules.length > 0) {
-          targetLesson = res.data.modules[0].lessons[0];
+        if (!targetLesson && modules.length > 0 && (modules[0].lessons || []).length > 0) {
+          targetLesson = modules[0].lessons[0];
         }
 
         if (targetLesson && targetLesson.isLocked) {
           let lastUnlocked = null;
-          for (const mod of res.data.modules) {
-            for (const l of mod.lessons) {
+          for (const mod of modules) {
+            for (const l of mod.lessons || []) {
               if (!l.isLocked) {
                 lastUnlocked = l;
               }
             }
           }
           if (lastUnlocked) {
-            // Only redirect+toast when there's a real unlocked alternative
             targetLesson = lastUnlocked;
             toast.error('This lesson is locked. Redirecting to last unlocked lesson.');
           }
-          // If ALL lessons are locked, stay on the first lesson silently —
-          // the backend still returns the content and showing the toast is misleading.
-          else if (res.data.modules.length > 0 && res.data.modules[0].lessons.length > 0) {
-            targetLesson = res.data.modules[0].lessons[0];
-            // Don't toast — learner has no unlocked alternative to go to
+          else if (modules.length > 0 && (modules[0].lessons || []).length > 0) {
+            targetLesson = modules[0].lessons[0];
           }
         }
 
-        if (targetLesson && String(lessonId) !== String(targetLesson.lessonId)) {
-          navigate(`/learner-dashboard/player/${courseId || 'course_123'}/${targetLesson.lessonId}`, { replace: true });
+        const resolvedTargetId = getLessonId(targetLesson);
+        if (targetLesson && resolvedTargetId && String(lessonId) !== String(resolvedTargetId)) {
+          navigate(`/learner-dashboard/player/${courseId || 'course_123'}/${resolvedTargetId}`, { replace: true });
         }
       } catch (error) {
         if (error.name === 'CanceledError' || error.constructor.name === 'Cancel') {
@@ -1238,28 +1248,45 @@ const CoursePlayer = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-[#080d19]">
-        <div className="relative w-16 h-16">
-          <div className="absolute inset-0 border-4 border-violet-500/10 rounded-full"></div>
-          <div className="absolute inset-0 border-4 border-violet-500 border-t-transparent rounded-full animate-spin"></div>
+      <div className="flex flex-col items-center justify-center min-h-[600px] h-full bg-[#020617] text-white p-8">
+        <div className="relative w-16 h-16 mb-4">
+          <div className="absolute inset-0 border-4 border-blue-500/10 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
+        <p className="text-xs font-bold uppercase tracking-widest text-blue-400 animate-pulse">Loading Course Player...</p>
+      </div>
+    );
+  }
+
+  if (!courseData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[600px] h-full bg-[#020617] text-white p-8 text-center">
+        <AlertCircle size={48} className="text-white/20 mb-4" />
+        <h3 className="text-xl font-bold mb-2">Unable to Load Course</h3>
+        <p className="text-white/40 text-xs max-w-sm mb-6">We couldn't retrieve the course lessons. Please try again.</p>
+        <button 
+          onClick={() => navigate('/learner-dashboard/learning')} 
+          className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg"
+        >
+          Return to My Learning
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-black overflow-hidden flex-col lg:flex-row">
+    <div className="flex min-h-screen bg-[#020617] text-white overflow-hidden flex-col lg:flex-row -m-4 sm:-m-6 lg:-m-10">
 
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between p-4 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shrink-0">
-        <button onClick={() => navigate(-1)} className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-          <ChevronLeft size={24} />
+      <div className="lg:hidden flex items-center justify-between p-4 bg-[#0f172a] border-b border-white/10 shrink-0 text-white z-20">
+        <button onClick={() => navigate('/learner-dashboard/learning')} className="text-white/80 hover:text-white flex items-center gap-1 font-bold text-xs">
+          <ChevronLeft size={20} /> Back
         </button>
-        <span className="font-semibold text-gray-900 dark:text-white truncate px-4">
-          {activeLesson?.title}
+        <span className="font-bold text-sm text-white truncate px-3 min-w-0 flex-1 text-center">
+          {activeLesson?.title || courseData?.title || 'Course Player'}
         </span>
-        <button onClick={() => setSidebarOpen(true)} className="text-gray-500 hover:text-gray-900 dark:hover:text-white">
-          <List size={24} />
+        <button onClick={() => setSidebarOpen(true)} className="text-white/80 hover:text-white p-1">
+          <List size={22} />
         </button>
       </div>
 
