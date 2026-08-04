@@ -271,7 +271,7 @@ const VideoPlayer = ({
     if (typeof window === 'undefined') return;
 
     // Monkey-patch navigator.mediaDevices.getDisplayMedia to block browser-based screen captures
-    if (navigator.mediaDevices && !navigator.mediaDevices.getDisplayMedia._isWrapped) {
+    if (navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function' && !navigator.mediaDevices.getDisplayMedia._isWrapped) {
       const originalGetDisplayMedia = navigator.mediaDevices.getDisplayMedia;
       const wrappedGetDisplayMedia = async function(constraints) {
         window.dispatchEvent(new CustomEvent('screen-capture-started', { detail: { type: 'api' } }));
