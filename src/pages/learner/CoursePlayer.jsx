@@ -1219,7 +1219,7 @@ const CoursePlayer = () => {
             {activeLesson?.title}
           </h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm">
-            Module: {courseData?.modules.find(m => m.lessons.some(l => String(l.lessonId) === String(activeLesson?.lessonId)))?.title}
+            Module: {courseData?.modules?.find(m => (m.lessons || []).some(l => isMatchingLesson(l, getLessonId(activeLesson))))?.title}
           </p>
           {activeLesson?.description && (
             <p className="mt-4 text-sm text-gray-600 dark:text-white/60 leading-relaxed">
@@ -1374,17 +1374,18 @@ const CoursePlayer = () => {
               ) : activeLesson && (() => {
                   const allLessons = [];
                   courseData?.modules?.forEach(mod => {
-                    mod.lessons.forEach(lesson => allLessons.push(lesson));
+                    (mod.lessons || []).forEach(lesson => allLessons.push(lesson));
                   });
-                  const currentIndex = allLessons.findIndex(l => String(l.lessonId) === String(activeLesson.lessonId));
+                  const activeId = getLessonId(activeLesson);
+                  const currentIndex = allLessons.findIndex(l => isMatchingLesson(l, activeId));
                   const nextLesson = currentIndex !== -1 && currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
                   const hasNext = nextLesson && !nextLesson.isLocked;
 
                   return (
                     <VideoPlayer
-                      key={activeLesson.lessonId}
+                      key={activeId || 'video-player'}
                       url={activeLesson.videoUrl}
-                      lessonId={activeLesson.lessonId}
+                      lessonId={activeId}
                       videoStatus={activeLesson.videoStatus}
                       videoProcessingError={activeLesson.videoProcessingError}
                       initialPosition={activeLesson.secondsWatched || 0}
